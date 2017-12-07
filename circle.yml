@@ -14,6 +14,12 @@ machine:
     OSS_DB_URL_TEST: 127.0.0.1
     OSS_REGION: ap-northeast-1
     OSS_SECRET_KEY_BASE: dummy
+    CC_TEST_REPORTER_ID: 71f7a691caaea5d8128475b351fbd7e3490341bf83f30e787136b32d0bdf6d99
+
+dependencies:
+  post:
+    - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+    - chmod +x ./cc-test-reporter
 
 database:
   override:
@@ -21,7 +27,9 @@ database:
 
 test:
   pre:
+    - ./cc-test-reporter before-build
     - bower install
+
 
 deployment:
   hub:
@@ -32,4 +40,3 @@ deployment:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASSWORD
       - docker push ryuzee/slidehub:build-$CIRCLE_BUILD_NUM
       - docker push ryuzee/slidehub:latest
-
