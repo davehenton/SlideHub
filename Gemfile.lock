@@ -547,7 +547,6 @@ DEPENDENCIES
   bullet
   byebug
   capybara
-  codeclimate-test-reporter
   coffee-rails
   counter_culture
   database_cleaner
